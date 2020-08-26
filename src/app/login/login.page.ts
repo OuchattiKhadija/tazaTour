@@ -44,11 +44,9 @@ export class LoginPage implements OnInit {
 
   facebookLogin() {
     if (this.platform.is('cordova')) {
-      console.log('PLateforme cordova');
-      //this.facebookCordova();
+        this.facebookCordova();
     } else {
-      console.log('PLateforme Web');
-      //this.facebookWeb();
+      this.facebookWeb();
     }
 }
 
@@ -69,7 +67,8 @@ export class LoginPage implements OnInit {
     this.afAuth
       .signInWithPopup(new firebase.auth.FacebookAuthProvider())
       .then((success) => {
-        console.log('Info Facebook: ' + JSON.stringify(success));
+        console.log('Nom: ' + success.user.displayName);
+        console.log('Nom: ' + success.user.uid);
       }).catch((error) => {
         console.log('Erreur: ' + JSON.stringify(error));
       });
