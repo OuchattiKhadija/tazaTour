@@ -1,0 +1,7 @@
+{
+  "name": "TazaTour",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
