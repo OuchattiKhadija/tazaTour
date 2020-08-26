@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,28 +10,28 @@ import {Router} from '@angular/router';
 })
 export class InscriptionPage implements OnInit {
 
-  email: string=""
-  nom: string=""
-  password: string=""
-  cpassword: string=""
+  email: string = ""
+  nom: string = ""
+  password: string = ""
+  cpassword: string = ""
 
 
-  constructor(public afAuth: AngularFireAuth, public router:Router) { }
+  constructor(public afAuth: AngularFireAuth, public router: Router) { }
 
   ngOnInit() {
   }
 
   async inscription() {
-    const { email, nom, password, cpassword } = this; 
-    if(password!=cpassword)
-    alert("les mots de passes ne se correspand pas !");
+    const { email, nom, password, cpassword } = this;
+    if (password != cpassword)
+      document.querySelector('.erreur').innerHTML = "les mots de passes ne se correspand pas";
     else{
       try {
         const res = await this.afAuth.createUserWithEmailAndPassword(email, password);
+        document.querySelector('.erreur').innerHTML = '';
         this.router.navigateByUrl("/login");
       } catch (err) {
-        console.dir(err);
-        alert("Login / Password incorrect !");
+        document.querySelector('.erreur').innerHTML = err.message;
       }
     }
   }

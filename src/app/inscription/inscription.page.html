@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar class="toolbar">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/login" text="Accueil"></ion-back-button>
@@ -20,10 +20,6 @@
       <ion-input [(ngModel)]="email" color="light" type="mail" placeholder="Adresse email"></ion-input>
     </ion-item>
 
-    <ion-item >
-      <ion-input [(ngModel)]="nom" color="light" type="text" placeholder="Nom complet"></ion-input>
-    </ion-item>
-
     <ion-item>
       <ion-input [(ngModel)]="password" color="light" type="password" placeholder="Mot de passe"></ion-input>
     </ion-item>
@@ -32,7 +28,9 @@
       <ion-input [(ngModel)]="cpassword" color="light" type="password" placeholder="Confirmez mot de passe"></ion-input>
     </ion-item>
 
-    <br>
+    <ion-item lines="none"> 
+      <ion-input class="erreur" slot="start"></ion-input>
+    </ion-item>
     
     <ion-button color="tertiary" expand="block" shape="round" (click)="inscription()">Inscription</ion-button>
 

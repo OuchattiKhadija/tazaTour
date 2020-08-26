@@ -24,10 +24,21 @@ ion-content {
   --ion-background-color: linear-gradient(#f5af19, #f12711);
   // --ion-background-color: linear-gradient(#485563, #29323c);
 }
+
 ion-item {
   --ion-background-color: transparent!important;
 }
+
 .flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.erreur {
+  color: darkred;
+}
+
+.err {
   display: flex;
   justify-content: space-between;
 }

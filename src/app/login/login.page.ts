@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-
+import { Router } from '@angular/router';
 import * as firebase from 'firebase/app';
 import { Facebook } from '@ionic-native/facebook/ngx';
 import { Platform } from '@ionic/angular';
@@ -21,7 +21,8 @@ export class LoginPage implements OnInit {
     public afDB: AngularFireDatabase,
     public afAuth: AngularFireAuth,
     private fb: Facebook,
-    public platform: Platform) { 
+    public platform: Platform,
+    private router: Router) { 
       try{
         this.providerFb = new firebase.auth.FacebookAuthProvider();
       }catch(err){
@@ -35,10 +36,10 @@ export class LoginPage implements OnInit {
     const { email, password } = this;
     try {
       const res = await this.afAuth.signInWithEmailAndPassword(email, password);
-      alert("vous êtes " + email);
+      document.querySelector('.erreur').innerHTML = '';
+      this.router.navigate(['/home'])
     } catch (err) {
-      console.dir(err);
-      alert("Login / Password incorrect !");
+      document.querySelector('.erreur').innerHTML = err.message;
     }
   }
 
@@ -56,7 +57,11 @@ export class LoginPage implements OnInit {
         .credential(response.authResponse.accessToken);
       firebase.auth().signInWithCredential(facebookCredential)
         .then((success) => {
-          console.log('Info Facebook: ' + JSON.stringify(success));
+          this.afDB.object('Users/' + success.user.uid).set({
+            displayName: success.user.displayName,
+            photoURL: success.user.photoURL
+          });
+          this.router.navigate(['/home']);
         }).catch((error) => {
           console.log('Erreur: ' + JSON.stringify(error));
         });
@@ -67,8 +72,11 @@ export class LoginPage implements OnInit {
     this.afAuth
       .signInWithPopup(new firebase.auth.FacebookAuthProvider())
       .then((success) => {
-        console.log('Nom: ' + success.user.displayName);
-        console.log('Nom: ' + success.user.uid);
+        this.afDB.object('Users/' + success.user.uid).set({
+          displayName: success.user.displayName,
+          photoURL: success.user.photoURL
+        });
+        this.router.navigate(['/home']);
       }).catch((error) => {
         console.log('Erreur: ' + JSON.stringify(error));
       });

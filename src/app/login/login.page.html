@@ -15,17 +15,23 @@
     <ion-item>
       <ion-input [(ngModel)]="password" color="light" type="password" placeholder="Mot de passe"></ion-input>
     </ion-item>
-
-    <ion-item lines="none">
-      <ion-button color="light" slot="end" fill="clear">Mot de passe oublié ?</ion-button>
-    </ion-item>
+    <div class="err">
+      <ion-item lines="none"> 
+        <ion-input class="erreur" slot="start"></ion-input>
+      </ion-item>
+  
+      <ion-item lines="none">
+        <ion-button color="light" slot="end" fill="clear">Mot de passe oublié ?</ion-button>
+      </ion-item>
+    </div>
+    
 
     <ion-button color="light" expand="block" shape="round" fill="outline" (click)="login()">Connexion</ion-button>
     <br>
     <ion-button routerLink="/inscription" color="tertiary" expand="block" shape="round">Inscription</ion-button>
 
     <ion-item lines="none">
-      <ion-label  text-center color="light">Ou connectez-vous avec</ion-label>
+      <ion-label color="light">Ou connectez-vous avec</ion-label>
     </ion-item>
 
     <div class="flex">
