@@ -12,4 +12,10 @@ export class HomePage implements OnInit {
   ngOnInit() {
   }
 
+  options = {
+    centeredSlides: true,
+    loop: true,
+    spaceBetween: -100,
+  };
+
 }
